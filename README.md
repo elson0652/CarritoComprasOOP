@@ -1,13 +1,14 @@
 # TechMarket - Plataforma e-Commerce
 
-Este proyecto implementa las clases básicas necesarias para una plataforma de comercio electrónico utilizando Java y los principios de la Programación Orientada a Objetos (POO).
+Este proyecto implementa una plataforma de comercio electrónico utilizando Java y los principios de la Programación Orientada a Objetos (POO), con énfasis en la herencia y el polimorfismo.
 
 ## 🚀 Características
 
-- Gestión de productos con control de inventario
-- Sistema de usuarios
+- Sistema de productos con especialización (físicos y digitales)
+- Sistema de usuarios con roles específicos (clientes y administradores)
 - Carrito de compras con funcionalidades completas
-- Validaciones de datos y manejo de errores
+- Historial de compras para clientes
+- Gestión de inventario para administradores
 
 ## 📦 Estructura del Proyecto
 
@@ -19,36 +20,45 @@ src/
 │           └── techmarket/
 │               ├── models/
 │               │   ├── Producto.java
+│               │   ├── ProductoDigital.java
+│               │   ├── ProductoFisico.java
 │               │   ├── Usuario.java
+│               │   ├── Cliente.java
+│               │   ├── Administrador.java
 │               │   └── Carrito.java
 │               └── Main.java
 ```
 
 ## 💡 Implementación
 
-### Clase Producto
-- Atributos: id, nombre, descripción, precio y stock
-- Métodos para gestionar el inventario
-- Validaciones para precio y stock
+### Jerarquía de Productos
+- **Producto (Abstracta)**
+  - Atributos base: id, nombre, descripción, precio y stock
+  - Método abstracto: getTipoProducto()
+- **ProductoDigital**
+  - Atributos específicos: formato, tamañoMB, urlDescarga
+- **ProductoFisico**
+  - Atributos específicos: peso, dimensiones (alto, ancho, profundidad)
+  - Cálculo de volumen
 
-### Clase Usuario
-- Atributos: id, nombre, email y contraseña
-- Métodos para gestionar la información del usuario
-- Implementación de toString() para mejor depuración
-
-### Clase Carrito
-- Gestión de lista de productos
-- Cálculo automático del total
-- Métodos para agregar y eliminar productos
-- Control de stock al realizar operaciones
+### Jerarquía de Usuarios
+- **Usuario (Abstracta)**
+  - Atributos base: id, nombre, email, contraseña
+  - Método abstracto: getTipoUsuario()
+- **Cliente**
+  - Historial de compras
+  - Información de envío
+- **Administrador**
+  - Gestión de inventario
+  - Permisos y roles
 
 ## 🔍 Características Destacadas
 
-1. **Encapsulamiento**: Todos los atributos son privados con getters y setters apropiados
-2. **Validaciones**: Control de stock y precios negativos
-3. **Gestión de Memoria**: Implementación de finalize() en Usuario
-4. **Colecciones**: Uso de ArrayList para el carrito
-5. **Formato**: Implementación de toString() para mejor visualización
+1. **Herencia**: Implementación de jerarquías de clases para productos y usuarios
+2. **Polimorfismo**: Uso de métodos abstractos y sobrescritura
+3. **Encapsulamiento**: Atributos privados con getters y setters
+4. **Validaciones**: Control de datos en todas las clases
+5. **Colecciones**: Uso de ArrayList para historial y permisos
 
 ## 🚀 Cómo Ejecutar
 
@@ -65,18 +75,24 @@ src/
 ## 💻 Ejemplo de Uso
 
 ```java
-Producto laptop = new Producto(1, "Laptop", "Laptop gaming", 999.99, 5);
-Usuario usuario = new Usuario(1, "Juan", "juan@email.com", "contraseña123");
-Carrito carrito = new Carrito();
+// Crear productos especializados
+ProductoFisico laptop = new ProductoFisico(1, "Laptop", "Gaming", 999.99, 5, 2.5, 1.5, 35.0, 25.0);
+ProductoDigital ebook = new ProductoDigital(2, "Java Guide", "Programming", 29.99, 100, "PDF", 15.5, "url");
 
-carrito.agregarProducto(laptop, 2);
-carrito.mostrarCarrito();
+// Crear usuarios con roles específicos
+Cliente cliente = new Cliente(1, "Juan", "juan@email.com", "pass123", "Calle 123", "555-0123");
+Administrador admin = new Administrador(2, "Ana", "ana@tech.com", "admin123", "Gerente", "Ventas");
+
+// Usar el carrito
+Carrito carrito = new Carrito();
+carrito.agregarProducto(laptop, 1);
+cliente.agregarCompra(carrito);
 ```
 
 ## 🛠️ Mejoras Futuras
 
-- Implementar persistencia de datos
-- Agregar sistema de pagos
-- Implementar historial de compras
-- Añadir categorías de productos
-- Implementar sistema de descuentos
+- Sistema de pagos integrado
+- Categorías de productos
+- Sistema de descuentos
+- Notificaciones por email
+- Panel de administración
