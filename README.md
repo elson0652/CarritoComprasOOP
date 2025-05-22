@@ -1,6 +1,6 @@
 # TechMarket - Plataforma e-Commerce
 
-Este proyecto implementa una plataforma de comercio electrónico utilizando Java y los principios de la Programación Orientada a Objetos (POO), con énfasis en la herencia y el polimorfismo.
+Este proyecto implementa una plataforma de comercio electrónico utilizando Java y los principios de la Programación Orientada a Objetos (POO), con énfasis en la herencia, el polimorfismo y sobrecarga
 
 ## 🚀 Características
 
