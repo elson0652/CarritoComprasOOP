@@ -45,6 +45,13 @@ public class ProductoDigital extends Producto {
     }
 
     @Override
+    public String mostrarDetalle() {
+        return super.mostrarDetalle() + 
+               String.format(" | Formato: %s | Tamaño: %.2f MB | URL: %s",
+                           formato, tamanoMB, urlDescarga);
+    }
+
+    @Override
     public String toString() {
         return super.toString().replace("}", 
                 ", formato='" + formato + '\'' +

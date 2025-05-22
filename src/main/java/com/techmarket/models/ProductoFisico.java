@@ -65,6 +65,13 @@ public class ProductoFisico extends Producto {
     }
 
     @Override
+    public String mostrarDetalle() {
+        return super.mostrarDetalle() + 
+               String.format(" | Peso: %.2f kg | Dimensiones: %.2fx%.2fx%.2f cm | Volumen: %.2f cm³",
+                           peso, alto, ancho, profundidad, getVolumen());
+    }
+
+    @Override
     public String toString() {
         return super.toString().replace("}", 
                 ", peso=" + peso +

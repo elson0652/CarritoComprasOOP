@@ -1,13 +1,12 @@
 package com.techmarket.models;
 
-public class Producto {
+public abstract class Producto {
     private int id;
     private String nombre;
     private String descripcion;
     private double precio;
     private int stock;
 
-    // Constructor
     public Producto(int id, String nombre, String descripcion, double precio, int stock) {
         this.id = id;
         this.nombre = nombre;
@@ -16,7 +15,6 @@ public class Producto {
         this.stock = stock;
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -63,6 +61,14 @@ public class Producto {
             return true;
         }
         return false;
+    }
+
+    public abstract String getTipoProducto();
+
+    // Método que será sobreescrito por las clases hijas
+    public String mostrarDetalle() {
+        return String.format("ID: %d | %s - %s | Precio: $%.2f | Stock: %d",
+                id, nombre, descripcion, precio, stock);
     }
 
     @Override

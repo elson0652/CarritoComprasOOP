@@ -1,12 +1,11 @@
 package com.techmarket.models;
 
-public class Usuario {
+public abstract class Usuario {
     private int id;
     private String nombre;
     private String email;
     private String contrasena;
 
-    // Constructor
     public Usuario(int id, String nombre, String email, String contrasena) {
         this.id = id;
         this.nombre = nombre;
@@ -14,7 +13,6 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -43,6 +41,8 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
+    public abstract String getTipoUsuario();
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -52,7 +52,6 @@ public class Usuario {
                 '}';
     }
 
-    // Destructor (opcional en Java)
     @Override
     protected void finalize() throws Throwable {
         System.out.println("Usuario " + nombre + " eliminado.");
