@@ -1,6 +1,11 @@
 package com.techmarket.models;
 
+import java.util.regex.Pattern;
+
 public abstract class Usuario {
+    private static final Pattern EMAIL_PATTERN = 
+        Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+    
     private int id;
     private String nombre;
     private String email;
@@ -8,9 +13,9 @@ public abstract class Usuario {
 
     public Usuario(int id, String nombre, String email, String contrasena) {
         this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-        this.contrasena = contrasena;
+        setNombre(nombre);
+        setEmail(email);
+        setContrasena(contrasena);
     }
 
     public int getId() {
@@ -22,7 +27,11 @@ public abstract class Usuario {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        } else {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
     }
 
     public String getEmail() {
@@ -30,15 +39,23 @@ public abstract class Usuario {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (email != null && EMAIL_PATTERN.matcher(email).matches()) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Formato de email inválido");
+        }
     }
 
-    public String getContrasena() {
+    protected String getContrasena() {
         return contrasena;
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        if (contrasena != null && contrasena.length() >= 8) {
+            this.contrasena = contrasena;
+        } else {
+            throw new IllegalArgumentException("La contraseña debe tener al menos 8 caracteres");
+        }
     }
 
     public abstract String getTipoUsuario();
@@ -50,11 +67,5 @@ public abstract class Usuario {
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 '}';
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        System.out.println("Usuario " + nombre + " eliminado.");
-        super.finalize();
     }
 }

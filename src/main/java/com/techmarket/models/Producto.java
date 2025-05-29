@@ -1,48 +1,11 @@
 package com.techmarket.models;
 
-public abstract class Producto {
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private double precio;
+public abstract class Producto extends Item {
     private int stock;
 
     public Producto(int id, String nombre, String descripcion, double precio, int stock) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        if (precio >= 0) {
-            this.precio = precio;
-        }
+        super(id, nombre, descripcion, precio);
+        setStock(stock);
     }
 
     public int getStock() {
@@ -52,6 +15,8 @@ public abstract class Producto {
     public void setStock(int stock) {
         if (stock >= 0) {
             this.stock = stock;
+        } else {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
         }
     }
 
@@ -63,21 +28,26 @@ public abstract class Producto {
         return false;
     }
 
+    @Override
+    public String getTipo() {
+        return getTipoProducto();
+    }
+
     public abstract String getTipoProducto();
 
-    // Método que será sobreescrito por las clases hijas
-    public String mostrarDetalle() {
+    @Override
+    public String getDetalles() {
         return String.format("ID: %d | %s - %s | Precio: $%.2f | Stock: %d",
-                id, nombre, descripcion, precio, stock);
+                getId(), getNombre(), getDescripcion(), getPrecio(), stock);
     }
 
     @Override
     public String toString() {
         return "Producto{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
+                "id=" + getId() +
+                ", nombre='" + getNombre() + '\'' +
+                ", descripcion='" + getDescripcion() + '\'' +
+                ", precio=" + getPrecio() +
                 ", stock=" + stock +
                 '}';
     }
