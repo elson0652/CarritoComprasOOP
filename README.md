@@ -1,98 +1,92 @@
 # TechMarket - Plataforma e-Commerce
 
-Este proyecto implementa una plataforma de comercio electrónico utilizando Java y los principios de la Programación Orientada a Objetos (POO), con énfasis en la herencia, el polimorfismo y sobrecarga
+Este proyecto implementa una plataforma de comercio electrónico utilizando Java, con énfasis en los principios de la Programación Orientada a Objetos (POO), incluyendo encapsulamiento, abstracción, herencia y polimorfismo.
 
-## 🚀 Características
+## 🎯 Objetivos del Proyecto
 
-- Sistema de productos con especialización (físicos y digitales)
-- Sistema de usuarios con roles específicos (clientes y administradores)
-- Carrito de compras con funcionalidades completas
-- Historial de compras para clientes
-- Gestión de inventario para administradores
+- Implementar una plataforma e-commerce robusta y escalable
+- Demostrar el uso efectivo de principios POO
+- Crear un sistema seguro y mantenible
 
-## 📦 Estructura del Proyecto
+## 🏗️ Arquitectura y Diseño
 
+### Encapsulamiento
+- Todos los atributos son privados (`private`)
+- Acceso controlado mediante getters y setters
+- Validaciones implementadas en setters:
+  - Precios no negativos
+  - Stock válido
+  - Formato de email
+  - Contraseña segura
+
+### Abstracción
+- Clase base abstracta `Item`
+  - Atributos comunes: id, nombre, descripción, precio
+  - Métodos abstractos: `getTipo()`, `getDetalles()`
+- Jerarquía de productos
+  - `Producto` extiende `Item`
+  - `ProductoFisico` y `ProductoDigital` heredan de `Producto`
+
+### Herencia
 ```
-src/
-├── main/
-│   └── java/
-│       └── com/
-│           └── techmarket/
-│               ├── models/
-│               │   ├── Producto.java
-│               │   ├── ProductoDigital.java
-│               │   ├── ProductoFisico.java
-│               │   ├── Usuario.java
-│               │   ├── Cliente.java
-│               │   ├── Administrador.java
-│               │   └── Carrito.java
-│               └── Main.java
-```
+Item (Abstracta)
+└── Producto (Abstracta)
+    ├── ProductoFisico
+    └── ProductoDigital
 
-## 💡 Implementación
-
-### Jerarquía de Productos
-- **Producto (Abstracta)**
-  - Atributos base: id, nombre, descripción, precio y stock
-  - Método abstracto: getTipoProducto()
-- **ProductoDigital**
-  - Atributos específicos: formato, tamañoMB, urlDescarga
-- **ProductoFisico**
-  - Atributos específicos: peso, dimensiones (alto, ancho, profundidad)
-  - Cálculo de volumen
-
-### Jerarquía de Usuarios
-- **Usuario (Abstracta)**
-  - Atributos base: id, nombre, email, contraseña
-  - Método abstracto: getTipoUsuario()
-- **Cliente**
-  - Historial de compras
-  - Información de envío
-- **Administrador**
-  - Gestión de inventario
-  - Permisos y roles
-
-## 🔍 Características Destacadas
-
-1. **Herencia**: Implementación de jerarquías de clases para productos y usuarios
-2. **Polimorfismo**: Uso de métodos abstractos y sobrescritura
-3. **Encapsulamiento**: Atributos privados con getters y setters
-4. **Validaciones**: Control de datos en todas las clases
-5. **Colecciones**: Uso de ArrayList para historial y permisos
-
-## 🚀 Cómo Ejecutar
-
-1. Asegúrate de tener Java JDK 11 o superior instalado
-2. Compila los archivos:
-   ```bash
-   javac src/main/java/com/techmarket/**/*.java
-   ```
-3. Ejecuta la clase principal:
-   ```bash
-   java src/main/java/com/techmarket/Main
-   ```
-
-## 💻 Ejemplo de Uso
-
-```java
-// Crear productos especializados
-ProductoFisico laptop = new ProductoFisico(1, "Laptop", "Gaming", 999.99, 5, 2.5, 1.5, 35.0, 25.0);
-ProductoDigital ebook = new ProductoDigital(2, "Java Guide", "Programming", 29.99, 100, "PDF", 15.5, "url");
-
-// Crear usuarios con roles específicos
-Cliente cliente = new Cliente(1, "Juan", "juan@email.com", "pass123", "Calle 123", "555-0123");
-Administrador admin = new Administrador(2, "Ana", "ana@tech.com", "admin123", "Gerente", "Ventas");
-
-// Usar el carrito
-Carrito carrito = new Carrito();
-carrito.agregarProducto(laptop, 1);
-cliente.agregarCompra(carrito);
+Usuario (Abstracta)
+├── Cliente
+└── Administrador
 ```
 
-## 🛠️ Mejoras Futuras
+### Polimorfismo
+- Método `getTipoProducto()` implementado diferentemente en cada tipo de producto
+- Método `getTipoUsuario()` específico para cada tipo de usuario
+- Sobrecarga de métodos en `Carrito` para agregar productos
 
-- Sistema de pagos integrado
-- Categorías de productos
-- Sistema de descuentos
-- Notificaciones por email
-- Panel de administración
+## 💡 Características Principales
+
+1. **Gestión de Productos**
+   - Productos físicos y digitales
+   - Control de inventario
+   - Validaciones de datos
+
+2. **Sistema de Usuarios**
+   - Roles específicos (Cliente/Administrador)
+   - Validación de datos de usuario
+   - Gestión segura de contraseñas
+
+3. **Carrito de Compras**
+   - Múltiples formas de agregar productos
+   - Cálculo automático de totales
+   - Control de stock
+
+## 🔒 Seguridad y Validaciones
+
+- Validación de email mediante expresiones regulares
+- Contraseñas con mínimo de 8 caracteres
+- Protección de datos sensibles
+- Control de acceso a métodos críticos
+
+## 🚀 Mejoras Futuras
+
+1. Implementación de base de datos
+2. Sistema de pagos
+3. Gestión de categorías
+4. Sistema de reseñas
+5. Panel administrativo completo
+
+## 📝 Conclusiones
+
+El proyecto demuestra la aplicación efectiva de los principios POO:
+
+- **Encapsulamiento**: Protección de datos y validaciones robustas
+- **Abstracción**: Jerarquía clara de clases con comportamientos comunes
+- **Herencia**: Reutilización de código y especialización de clases
+- **Polimorfismo**: Flexibilidad en el manejo de diferentes tipos de productos y usuarios
+
+La arquitectura resultante es:
+- Mantenible: Código organizado y modular
+- Escalable: Fácil de extender con nuevas funcionalidades
+- Segura: Datos protegidos y validados
+- Reutilizable: Componentes bien definidos y modulares
