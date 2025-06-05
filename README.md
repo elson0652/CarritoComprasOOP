@@ -23,9 +23,12 @@ Este proyecto implementa una plataforma de comercio electrónico utilizando Java
 - Clase base abstracta `Item`
   - Atributos comunes: id, nombre, descripción, precio
   - Métodos abstractos: `getTipo()`, `getDetalles()`
-- Jerarquía de productos
-  - `Producto` extiende `Item`
-  - `ProductoFisico` y `ProductoDigital` heredan de `Producto`
+- Clase abstracta `GestorInventario`
+  - Métodos abstractos para gestión de inventario
+  - Implementaciones específicas para productos físicos y digitales
+- Interfaz `ProcesoPago`
+  - Define contrato para diferentes métodos de pago
+  - Implementaciones para tarjeta y PayPal
 
 ### Herencia
 ```
@@ -34,21 +37,27 @@ Item (Abstracta)
     ├── ProductoFisico
     └── ProductoDigital
 
+GestorInventario (Abstracta)
+├── InventarioFisico
+└── InventarioDigital
+
 Usuario (Abstracta)
 ├── Cliente
 └── Administrador
 ```
 
-### Polimorfismo
-- Método `getTipoProducto()` implementado diferentemente en cada tipo de producto
-- Método `getTipoUsuario()` específico para cada tipo de usuario
-- Sobrecarga de métodos en `Carrito` para agregar productos
+### Interfaces
+```
+ProcesoPago
+├── PagoTarjeta
+└── PagoPayPal
+```
 
 ## 💡 Características Principales
 
 1. **Gestión de Productos**
    - Productos físicos y digitales
-   - Control de inventario
+   - Control de inventario especializado
    - Validaciones de datos
 
 2. **Sistema de Usuarios**
@@ -56,10 +65,15 @@ Usuario (Abstracta)
    - Validación de datos de usuario
    - Gestión segura de contraseñas
 
-3. **Carrito de Compras**
-   - Múltiples formas de agregar productos
-   - Cálculo automático de totales
-   - Control de stock
+3. **Sistema de Pagos**
+   - Múltiples métodos de pago
+   - Proceso de pago seguro
+   - Seguimiento del estado de pagos
+
+4. **Gestión de Inventario**
+   - Inventario físico y digital separado
+   - Control de capacidad
+   - Validaciones específicas por tipo
 
 ## 🔒 Seguridad y Validaciones
 
@@ -71,22 +85,11 @@ Usuario (Abstracta)
 ## 🚀 Mejoras Futuras
 
 1. Implementación de base de datos
-2. Sistema de pagos
-3. Gestión de categorías
-4. Sistema de reseñas
-5. Panel administrativo completo
+2. Integración con pasarelas de pago reales
+3. Sistema de notificaciones
+4. Panel administrativo completo
+5. Sistema de reseñas
 
 ## 📝 Conclusiones
 
-El proyecto demuestra la aplicación efectiva de los principios POO:
-
-- **Encapsulamiento**: Protección de datos y validaciones robustas
-- **Abstracción**: Jerarquía clara de clases con comportamientos comunes
-- **Herencia**: Reutilización de código y especialización de clases
-- **Polimorfismo**: Flexibilidad en el manejo de diferentes tipos de productos y usuarios
-
-La arquitectura resultante es:
-- Mantenible: Código organizado y modular
-- Escalable: Fácil de extender con nuevas funcionalidades
-- Segura: Datos protegidos y validados
-- Reutilizable: Componentes bien definidos y modulares
+El proyecto demuestra una implementación robusta y efectiva de los principios fundamentales de la Programación Orientada a Objetos, donde el encapsulamiento protege la integridad de los datos, la abstracción establece una estructura clara con clases abstractas e interfaces bien definidas, la herencia permite la reutilización efectiva de código, y el polimorfismo ofrece flexibilidad en el manejo de diferentes tipos de productos, inventarios y métodos de pago, resultando en una arquitectura mantenible, escalable y segura que satisface las necesidades de una plataforma de comercio electrónico moderna.
