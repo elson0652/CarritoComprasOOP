@@ -459,10 +459,10 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 👨‍💻 Autor
 
-**Tu Nombre**
+**Elson Angulo MIna**
 - GitHub: [@tu-usuario](https://github.com/tu-usuario)
 - LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
-- Email: tu.email@ejemplo.com
+- Email: angels1203@outlook.es 
 
 ## 🙏 Agradecimientos
 
