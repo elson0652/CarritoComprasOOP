@@ -460,8 +460,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 ## 👨‍💻 Autor
 
 **Elson Angulo MIna**
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
+- GitHub: [elson0652](https://github.com/elson0652/CarritoComprasOOP)
 - Email: angels1203@outlook.es 
 
 ## 🙏 Agradecimientos
